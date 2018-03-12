@@ -4,9 +4,10 @@ const hbs = require('hbs');
 
 const app = express();
 
+hbs.registerPartials(__dirname + '/views/partials');
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
-app.set('views', './views');
+app.set('views', '.views/layouts/');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page',
+    message: 'Some text gere',
     currentYear: new Date().getFullYear()
   });
 });
